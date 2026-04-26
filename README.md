@@ -29,11 +29,11 @@ You must clone the required repositories into the correct folders:
 
 **Backend**
 - Clone your backend project into the *backend/* directory:
-- `git clone https://github.com/IDATA2301/idata2306-group-9-1 backend/`
+- `git clone https://github.com/IDATA2301/idata2306-group-9-1`
 
 **Frontend**
 - Clone your frontend project into the *frontend/* directory:
-- `git clone https://github.com/IDATA2301/idata2301-group-9 frontend/`
+- `git clone https://github.com/IDATA2301/idata2301-group-9`
 
 ---
 
@@ -58,7 +58,7 @@ docker compose version
 Run the full stack in development mode:
 
 ```bash
-docker compose -f frontend/docker-compose.dev.yml up --build
+docker compose -f docker-compose.dev.yml up --build
 ```
 
 ### Features
@@ -74,7 +74,7 @@ docker compose -f frontend/docker-compose.dev.yml up --build
 Run the production setup:
 
 ```bash
-docker compose -f frontend/docker-compose.prod.yml up --build -d
+docker compose -f docker-compose.prod.yml up --build -d
 ```
 
 ### Features
