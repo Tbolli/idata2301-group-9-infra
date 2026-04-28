@@ -58,7 +58,7 @@ docker compose version
 Run the full stack in development mode:
 
 ```bash
-docker compose -f docker-compose.dev.yml up --build
+docker compose -f docker-compose.dev.yml up --build --watch
 ```
 
 ### Features
