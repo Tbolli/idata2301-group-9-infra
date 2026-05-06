@@ -3,33 +3,33 @@
 -- =========================
 
 CREATE TABLE roles (
-    id SERIAL PRIMARY KEY,
-    type VARCHAR(100) NOT NULL UNIQUE
+                       id SERIAL PRIMARY KEY,
+                       type VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE bookAuthors (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+                             id SERIAL PRIMARY KEY,
+                             name VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE categories (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL UNIQUE
+                            id SERIAL PRIMARY KEY,
+                            name VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE providers (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+                           id SERIAL PRIMARY KEY,
+                           name VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE publishers (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
+                            id SERIAL PRIMARY KEY,
+                            name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE format (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(64) NOT NULL
+                        id SERIAL PRIMARY KEY,
+                        name VARCHAR(64) NOT NULL
 );
 
 -- =========================
@@ -37,34 +37,38 @@ CREATE TABLE format (
 -- =========================
 
 CREATE TABLE sub_categories (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    category_id INTEGER,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+                                id SERIAL PRIMARY KEY,
+                                name VARCHAR(100) NOT NULL,
+                                category_id INTEGER,
+                                FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    mail VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(265),
-    role_id INTEGER NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
+                       id SERIAL PRIMARY KEY,
+                       name VARCHAR(100) NOT NULL,
+                       mail VARCHAR(100) NOT NULL UNIQUE,
+                       password VARCHAR(265),
+                       role_id INTEGER NOT NULL,
+                       FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE books (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(200) NOT NULL,
-    description TEXT,
-    image_url VARCHAR(500),
-    published_year INTEGER,
-    category_id INTEGER,
-    publisher_id INTEGER,
-    sub_category_id INTEGER,
-    created_at TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES categories(id),
-    FOREIGN KEY (publisher_id) REFERENCES publishers(id),
-    FOREIGN KEY (sub_category_id) REFERENCES sub_categories(id)
+                       id SERIAL PRIMARY KEY,
+                       title VARCHAR(200) NOT NULL,
+                       description TEXT,
+                       image_url VARCHAR(500),
+                       published_year INTEGER,
+                       category_id INTEGER,
+                       publisher_id INTEGER,
+                       sub_category_id INTEGER,
+                       created_at TIMESTAMP,
+                       page_count INTEGER CHECK (page_count > 0),
+                       avg_rating NUMERIC(3,2) DEFAULT 0,
+                       review_count INTEGER DEFAULT 0,
+
+                       FOREIGN KEY (category_id) REFERENCES categories(id),
+                       FOREIGN KEY (publisher_id) REFERENCES publishers(id),
+                       FOREIGN KEY (sub_category_id) REFERENCES sub_categories(id)
 );
 
 -- =========================
@@ -72,18 +76,18 @@ CREATE TABLE books (
 -- =========================
 
 CREATE TABLE book_authors (
-    book_id INTEGER NOT NULL,
-    author_id INTEGER NOT NULL,
-    PRIMARY KEY (book_id, author_id),
-    FOREIGN KEY (book_id) REFERENCES books(id),
-    FOREIGN KEY (author_id) REFERENCES bookAuthors(id)
+                              book_id INTEGER NOT NULL,
+                              author_id INTEGER NOT NULL,
+                              PRIMARY KEY (book_id, author_id),
+                              FOREIGN KEY (book_id) REFERENCES books(id),
+                              FOREIGN KEY (author_id) REFERENCES bookAuthors(id)
 );
 
 CREATE TABLE book_keywords (
-    book_id INTEGER NOT NULL,
-    word VARCHAR(100) NOT NULL,
-    PRIMARY KEY (book_id, word),
-    FOREIGN KEY (book_id) REFERENCES books(id)
+                               book_id INTEGER NOT NULL,
+                               word VARCHAR(100) NOT NULL,
+                               PRIMARY KEY (book_id, word),
+                               FOREIGN KEY (book_id) REFERENCES books(id)
 );
 
 -- =========================
@@ -91,49 +95,49 @@ CREATE TABLE book_keywords (
 -- =========================
 
 CREATE TABLE book_prices (
-    id SERIAL PRIMARY KEY,
-    book_id INTEGER,
-    provider_id INTEGER,
-    price NUMERIC(10,2) NOT NULL,
-    currency VARCHAR(10) DEFAULT 'NOK',
-    format_id INTEGER,
-    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
-    FOREIGN KEY (provider_id) REFERENCES providers(id) ON DELETE CASCADE,
-    FOREIGN KEY (format_id) REFERENCES format(id)
+                             id SERIAL PRIMARY KEY,
+                             book_id INTEGER,
+                             provider_id INTEGER,
+                             price NUMERIC(10,2) NOT NULL,
+                             currency VARCHAR(10) DEFAULT 'NOK',
+                             format_id INTEGER,
+                             FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+                             FOREIGN KEY (provider_id) REFERENCES providers(id) ON DELETE CASCADE,
+                             FOREIGN KEY (format_id) REFERENCES format(id)
 );
 
 CREATE TABLE carts (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER UNIQUE,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+                       id SERIAL PRIMARY KEY,
+                       user_id INTEGER UNIQUE,
+                       FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE cart_items (
-    id SERIAL PRIMARY KEY,
-    cart_id INTEGER,
-    book_price_id INTEGER,
-    quantity INTEGER DEFAULT 1,
-    FOREIGN KEY (cart_id) REFERENCES carts(id),
-    FOREIGN KEY (book_price_id) REFERENCES book_prices(id)
+                            id SERIAL PRIMARY KEY,
+                            cart_id INTEGER,
+                            book_price_id INTEGER,
+                            quantity INTEGER DEFAULT 1,
+                            FOREIGN KEY (cart_id) REFERENCES carts(id),
+                            FOREIGN KEY (book_price_id) REFERENCES book_prices(id)
 );
 
 CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER,
-    total_price NUMERIC(10,2),
-    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status VARCHAR(50) DEFAULT 'Completed',
-    FOREIGN KEY (user_id) REFERENCES users(id)
+                        id SERIAL PRIMARY KEY,
+                        user_id INTEGER,
+                        total_price NUMERIC(10,2),
+                        order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        status VARCHAR(50) DEFAULT 'Completed',
+                        FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE order_items (
-    id SERIAL PRIMARY KEY,
-    order_id INTEGER,
-    book_price_id INTEGER,
-    quantity INTEGER DEFAULT 1,
-    price_at_purchase NUMERIC(10,2),
-    FOREIGN KEY (order_id) REFERENCES orders(id),
-    FOREIGN KEY (book_price_id) REFERENCES book_prices(id)
+                             id SERIAL PRIMARY KEY,
+                             order_id INTEGER,
+                             book_price_id INTEGER,
+                             quantity INTEGER DEFAULT 1,
+                             price_at_purchase NUMERIC(10,2),
+                             FOREIGN KEY (order_id) REFERENCES orders(id),
+                             FOREIGN KEY (book_price_id) REFERENCES book_prices(id)
 );
 
 -- =========================
@@ -141,20 +145,100 @@ CREATE TABLE order_items (
 -- =========================
 
 CREATE TABLE reviews (
-    id SERIAL PRIMARY KEY,
-    book_id INTEGER,
-    user_id INTEGER,
-    rating INTEGER CHECK (rating >= 1 AND rating <= 5),
-    comment TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (book_id) REFERENCES books(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+                         id SERIAL PRIMARY KEY,
+                         book_id INTEGER,
+                         user_id INTEGER,
+                         rating INTEGER CHECK (rating >= 1 AND rating <= 5),
+                         comment TEXT,
+                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                         FOREIGN KEY (book_id) REFERENCES books(id),
+                         FOREIGN KEY (user_id) REFERENCES users(id),
+
+    -- prevent duplicate reviews per user per book
+                         UNIQUE (book_id, user_id)
 );
 
 CREATE TABLE wishlist (
-    user_id INTEGER,
-    book_id INTEGER,
-    PRIMARY KEY (user_id, book_id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
+                          user_id INTEGER,
+                          book_id INTEGER,
+                          PRIMARY KEY (user_id, book_id),
+                          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                          FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
 );
+
+-- =========================
+-- TRIGGER FUNCTION
+-- =========================
+
+CREATE OR REPLACE FUNCTION update_book_rating()
+RETURNS TRIGGER AS $$
+DECLARE
+current_avg NUMERIC;
+    current_count INTEGER;
+BEGIN
+
+SELECT avg_rating, review_count
+INTO current_avg, current_count
+FROM books
+WHERE id = COALESCE(NEW.book_id, OLD.book_id);
+
+-- INSERT
+IF TG_OP = 'INSERT' THEN
+UPDATE books
+SET
+    avg_rating = ((current_avg * current_count) + NEW.rating) / (current_count + 1),
+    review_count = current_count + 1
+WHERE id = NEW.book_id;
+
+RETURN NEW;
+END IF;
+
+    -- DELETE
+    IF TG_OP = 'DELETE' THEN
+        IF current_count <= 1 THEN
+UPDATE books
+SET avg_rating = 0, review_count = 0
+WHERE id = OLD.book_id;
+ELSE
+UPDATE books
+SET
+    avg_rating = ((current_avg * current_count) - OLD.rating) / (current_count - 1),
+    review_count = current_count - 1
+WHERE id = OLD.book_id;
+END IF;
+
+RETURN OLD;
+END IF;
+
+    -- UPDATE (rating changed)
+    IF TG_OP = 'UPDATE' THEN
+UPDATE books
+SET
+    avg_rating = ((current_avg * current_count) - OLD.rating + NEW.rating) / current_count
+WHERE id = NEW.book_id;
+
+RETURN NEW;
+END IF;
+
+RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================
+-- TRIGGERS
+-- =========================
+
+CREATE TRIGGER review_insert_trigger
+    AFTER INSERT ON reviews
+    FOR EACH ROW
+    EXECUTE FUNCTION update_book_rating();
+
+CREATE TRIGGER review_update_trigger
+    AFTER UPDATE ON reviews
+    FOR EACH ROW
+    EXECUTE FUNCTION update_book_rating();
+
+CREATE TRIGGER review_delete_trigger
+    AFTER DELETE ON reviews
+    FOR EACH ROW
+    EXECUTE FUNCTION update_book_rating();

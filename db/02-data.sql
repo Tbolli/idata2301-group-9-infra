@@ -89,25 +89,25 @@ ON CONFLICT DO NOTHING;
 -- =========================
 INSERT INTO books (
     id, title, description, published_year,
-    category_id, publisher_id, sub_category_id, created_at
+    category_id, publisher_id, sub_category_id, created_at, page_count
 ) VALUES
-      (1, '1984', 'Dystopian novel', 1949, 1, 1, 1, NOW()),
-      (2, 'Clean Code', 'Programming best practices', 2008, 2, 2, 2, NOW()),
-      (3, 'Harry Potter and the Sorcerer''s Stone', 'Wizarding adventure', 1997, 1, 3, 1, NOW()),
-      (4, 'The Hobbit', 'Fantasy adventure', 1937, 1, 4, 1, NOW()),
-      (5, 'Refactoring', 'Improving code structure', 1999, 2, 5, 2, NOW()),
-      (6, 'The Pragmatic Programmer', 'Software craftsmanship', 1999, 2, 5, 2, NOW()),
-      (7, 'Foundation', 'Epic science fiction', 1951, 3, 4, 3, NOW()),
-      (8, 'Dune', 'Sci-fi political saga', 1965, 3, 4, 3, NOW()),
-      (9, 'JavaScript: The Good Parts', 'JS fundamentals', 2008, 2, 5, 2, NOW()),
-      (10, 'Steve Jobs', 'Biography of Steve Jobs', 2011, 4, 4, 4, NOW()),
+      (1, '1984', 'Dystopian novel', 1949, 1, 1, 1, NOW(), 328),
+      (2, 'Clean Code', 'Programming best practices', 2008, 2, 2, 2, NOW(), 464),
+      (3, 'Harry Potter and the Sorcerer''s Stone', 'Wizarding adventure', 1997, 1, 3, 1, NOW(), 309),
+      (4, 'The Hobbit', 'Fantasy adventure', 1937, 1, 4, 1, NOW(), 310),
+      (5, 'Refactoring', 'Improving code structure', 1999, 2, 5, 2, NOW(), 448),
+      (6, 'The Pragmatic Programmer', 'Software craftsmanship', 1999, 2, 5, 2, NOW(), 352),
+      (7, 'Foundation', 'Epic science fiction', 1951, 3, 4, 3, NOW(), 255),
+      (8, 'Dune', 'Sci-fi political saga', 1965, 3, 4, 3, NOW(), 412),
+      (9, 'JavaScript: The Good Parts', 'JS fundamentals', 2008, 2, 5, 2, NOW(), 176),
+      (10, 'Steve Jobs', 'Biography of Steve Jobs', 2011, 4, 4, 4, NOW(), 656),
 
 -- EXTRA BOOKS
-      (11, 'Animal Farm', 'Political satire', 1945, 1, 1, 1, NOW()),
-      (12, 'The Silmarillion', 'Mythopoeic works', 1977, 1, 4, 1, NOW()),
-      (13, 'Clean Architecture', 'Software design principles', 2017, 2, 2, 2, NOW()),
-      (14, 'I, Robot', 'Robot short stories', 1950, 3, 4, 3, NOW()),
-      (15, 'Children of Dune', 'Dune sequel', 1976, 3, 4, 3, NOW())
+      (11, 'Animal Farm', 'Political satire', 1945, 1, 1, 1, NOW(), 112),
+      (12, 'The Silmarillion', 'Mythopoeic works', 1977, 1, 4, 1, NOW(), 365),
+      (13, 'Clean Architecture', 'Software design principles', 2017, 2, 2, 2, NOW(), 432),
+      (14, 'I, Robot', 'Robot short stories', 1950, 3, 4, 3, NOW(), 224),
+      (15, 'Children of Dune', 'Dune sequel', 1976, 3, 4, 3, NOW(), 444)
 ON CONFLICT DO NOTHING;
 
 -- =========================
