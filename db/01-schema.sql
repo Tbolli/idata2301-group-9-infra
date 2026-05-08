@@ -166,6 +166,16 @@ CREATE TABLE wishlist (
                           FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
 );
 
+CREATE TABLE password_reset_tokens (
+                          id SERIAL PRIMARY KEY,
+                          user_id INTEGER,
+                          token UUID,
+                          expires_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '15 minutes',
+                          used BOOLEAN DEFAULT FALSE,
+                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- =========================
 -- TRIGGER FUNCTION
 -- =========================

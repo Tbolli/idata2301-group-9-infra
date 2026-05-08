@@ -9,12 +9,12 @@ ON CONFLICT DO NOTHING;
 -- =========================
 -- USERS
 -- =========================
-INSERT INTO users (id, name, mail, password, role_id) VALUES
-                                                          (1, 'tom', 'tom@tom.com', '$2a$10$7QJ6mU6Q8gQ0n0ZJz5Yk6u1vZzFJ8q6nZ6v8mZz2u8y1WzGxYkQyW', 2),
-                                                          (2, 'user', 'user@bookora.com', '$2a$10$wH7rK9sL2pQ8eT1zYx0F4u6Jm2kP9cX7vYz1rN6sQeT8uW0pLk9aG', 1),
-                                                          (3, 'alice', 'alice@mail.com', '$2a$10$3mZx8YkL0pQ7sT2wH9eR5uF6cJ1nV8bXz0qW4rYt6uI9oP2aS7dF', 1),
-                                                          (4, 'bob', 'bob@mail.com', '$2a$10$9LpQw8Xz1mN7sT6yR0eF5uH2kJ3cV4bZxY8rU1iO9pA6sD2fG7hJ', 1),
-                                                          (5, 'charlie', 'charlie@mail.com', '$2a$10$kP9sX2wQ7eT6yR1mN8uF5cJ3vZ0bH4YxWzI2oA9pL6dG7fS8hKj', 1)
+INSERT INTO users (name, mail, password, role_id) VALUES
+                                                          ( 'tom', 'tom@tom.com', '$2a$10$7QJ6mU6Q8gQ0n0ZJz5Yk6u1vZzFJ8q6nZ6v8mZz2u8y1WzGxYkQyW', 2),
+                                                          ( 'user', 'user@bookora.com', '$2a$10$wH7rK9sL2pQ8eT1zYx0F4u6Jm2kP9cX7vYz1rN6sQeT8uW0pLk9aG', 1),
+                                                          ( 'alice', 'alice@mail.com', '$2a$10$3mZx8YkL0pQ7sT2wH9eR5uF6cJ1nV8bXz0qW4rYt6uI9oP2aS7dF', 1),
+                                                          ( 'bob', 'bob@mail.com', '$2a$10$9LpQw8Xz1mN7sT6yR0eF5uH2kJ3cV4bZxY8rU1iO9pA6sD2fG7hJ', 1),
+                                                          ( 'charlie', 'charlie@mail.com', '$2a$10$kP9sX2wQ7eT6yR1mN8uF5cJ3vZ0bH4YxWzI2oA9pL6dG7fS8hKj', 1)
 ON CONFLICT DO NOTHING;
 
 -- =========================
