@@ -65,6 +65,7 @@ CREATE TABLE books (
                        page_count INTEGER CHECK (page_count > 0),
                        avg_rating NUMERIC(3,2) DEFAULT 0,
                        review_count INTEGER DEFAULT 0,
+                       is_visible BOOLEAN DEFAULT TRUE,
 
                        FOREIGN KEY (category_id) REFERENCES categories(id),
                        FOREIGN KEY (publisher_id) REFERENCES publishers(id),
