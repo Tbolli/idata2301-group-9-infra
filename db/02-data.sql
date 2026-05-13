@@ -40,7 +40,7 @@ ON CONFLICT DO NOTHING;
 -- =========================
 -- AUTHORS
 -- =========================
-INSERT INTO bookAuthors (id, name) VALUES
+INSERT INTO authors (id, name) VALUES
                                    (1, 'George Orwell'),
                                    (2, 'Robert C. Martin'),
                                    (3, 'J.K. Rowling'),
