@@ -102,6 +102,7 @@ CREATE TABLE book_prices (
                              price NUMERIC(10,2) NOT NULL,
                              currency VARCHAR(10) DEFAULT 'NOK',
                              format_id INTEGER,
+                             stock INTEGER DEFAULT 1,
                              FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
                              FOREIGN KEY (provider_id) REFERENCES providers(id) ON DELETE CASCADE,
                              FOREIGN KEY (format_id) REFERENCES format(id)
