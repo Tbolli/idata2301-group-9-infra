@@ -309,7 +309,7 @@ INSERT INTO public.book_prices (id, book_id, provider_id, price, currency, forma
 INSERT INTO public.book_prices (id, book_id, provider_id, price, currency, format_id) VALUES (23, 12, 3, 79.00, 'NOK', 4);
 INSERT INTO public.book_prices (id, book_id, provider_id, price, currency, format_id) VALUES (24, 12, 10, 65.00, 'NOK', 1);
 INSERT INTO public.book_prices (id, book_id, provider_id, price, currency, format_id) VALUES (25, 13, 7, 219.00, 'NOK', 2);
-INSERT INTO public.book_prices (id, book_id, provider_id, price, currency, format_id) VALUES (26, 13, 6, 199.00, 'NOK', 1);
+INSERT INTO public.book_prices (id, book_id, provider_id, price, currency, format_id, stock) VALUES (26, 13, 6, 199.00, 'NOK', 1, 12);
 
 -- Fix the invisible sequence counters!
 SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
