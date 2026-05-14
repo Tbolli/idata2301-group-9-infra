@@ -119,6 +119,7 @@ CREATE TABLE cart_items (
                             cart_id INTEGER,
                             book_price_id INTEGER,
                             quantity INTEGER DEFAULT 1,
+                            UNIQUE (cart_id, book_price_id),
                             FOREIGN KEY (cart_id) REFERENCES carts(id),
                             FOREIGN KEY (book_price_id) REFERENCES book_prices(id)
 );
