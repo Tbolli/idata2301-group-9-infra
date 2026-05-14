@@ -164,6 +164,7 @@ CREATE TABLE reviews (
 CREATE TABLE wishlist (
                           user_id INTEGER,
                           book_id INTEGER,
+                          added_at TIMESTAMP NOT NULL DEFAULT NOW(),
                           PRIMARY KEY (user_id, book_id),
                           FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
                           FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
