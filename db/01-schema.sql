@@ -7,7 +7,7 @@ CREATE TABLE roles (
                        type VARCHAR(100) NOT NULL UNIQUE
 );
 
-CREATE TABLE bookAuthors (
+CREATE TABLE authors (
                              id SERIAL PRIMARY KEY,
                              name VARCHAR(100) NOT NULL UNIQUE
 );
@@ -61,7 +61,7 @@ CREATE TABLE books (
                        category_id INTEGER,
                        publisher_id INTEGER,
                        sub_category_id INTEGER,
-                       created_at TIMESTAMP,
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        page_count INTEGER CHECK (page_count > 0),
                        avg_rating NUMERIC(3,2) DEFAULT 0,
                        review_count INTEGER DEFAULT 0,
@@ -81,7 +81,7 @@ CREATE TABLE book_authors (
                               author_id INTEGER NOT NULL,
                               PRIMARY KEY (book_id, author_id),
                               FOREIGN KEY (book_id) REFERENCES books(id),
-                              FOREIGN KEY (author_id) REFERENCES bookAuthors(id)
+                              FOREIGN KEY (author_id) REFERENCES authors(id)
 );
 
 CREATE TABLE book_keywords (

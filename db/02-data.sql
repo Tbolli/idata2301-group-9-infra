@@ -48,8 +48,8 @@ INSERT INTO public.sub_categories (id, name, category_id) VALUES (11, 'Children'
 INSERT INTO public.sub_categories (id, name, category_id) VALUES (12, 'Picture Books', 2);
 INSERT INTO public.sub_categories (id, name, category_id) VALUES (13, 'Middle Grade', 2);
 INSERT INTO public.sub_categories (id, name, category_id) VALUES (14, 'Young Adult', 2);
-INSERT INTO public.sub_categories (id, name, category_id) VALUES (15, 'Children''s Fantasy', 2);
-INSERT INTO public.sub_categories (id, name, category_id) VALUES (16, 'Children''s Adventure', 2);
+INSERT INTO public.sub_categories (id, name, category_id) VALUES (15, 'Childrens Fantasy', 2);
+INSERT INTO public.sub_categories (id, name, category_id) VALUES (16, 'Childrens Adventure', 2);
 INSERT INTO public.sub_categories (id, name, category_id) VALUES (17, 'Educational Children''s', 2);
 INSERT INTO public.sub_categories (id, name, category_id) VALUES (18, 'Software Development', 3);
 INSERT INTO public.sub_categories (id, name, category_id) VALUES (19, 'Cybersecurity', 3);
