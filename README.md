@@ -88,11 +88,11 @@ docker compose -f docker-compose.prod.yml up --build -d
 
 ## Services Overview
 
-| Service  | Description                    | Port   |
-| -------- | ------------------------------ | ------ |
-| backend  | Spring Boot API                | 8080   |
-| frontend | Nginx (static + proxy)         | 80     |
-| db       | Database (initialized via SQL) | varies |
+| Service  | Description                    | Port                   |
+| -------- | ------------------------------ |------------------------|
+| backend  | Spring Boot API                | 8080                   |
+| frontend | Nginx (static + proxy)         | 80, 433 (bookora.info) |
+| db       | Database (initialized via SQL) | varies                 |
 
 ---
 
