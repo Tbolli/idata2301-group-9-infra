@@ -1,0 +1,57 @@
+services:
+  # Dev environment with Docker Postgres and backend watch reload.
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: bookora
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: nuapgr9
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bookora"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile.prod
+    container_name: spring_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-jdbc:postgresql://db:5432/bookora}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME:-postgres}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-nuapgr9}
+      JWT_SECRET: ${JWT_SECRET:-very-secret-key-1234567890123456}
+
+  web:
+    image: jonasal/nginx-certbot:latest
+    container_name: app-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      CERTBOT_EMAIL: bookora.group.9@email.com
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./frontend/nginx.cloud.conf:/etc/nginx/user_conf.d/default.conf:ro
+      - ./ssl:/etc/letsencrypt
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
