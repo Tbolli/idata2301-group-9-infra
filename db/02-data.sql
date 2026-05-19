@@ -32,6 +32,8 @@ INSERT INTO public.categories (id, name) VALUES (1, 'Fiction');
 INSERT INTO public.categories (id, name) VALUES (2, 'Children');
 INSERT INTO public.categories (id, name) VALUES (3, 'Technology');
 INSERT INTO public.categories (id, name) VALUES (4, 'Digital');
+INSERT INTO public.categories (id, name) VALUES (5, 'Horror');
+
 
 INSERT INTO public.sub_categories (id, name, category_id) VALUES (1, 'Classic Fiction', 1);
 INSERT INTO public.sub_categories (id, name, category_id) VALUES (2, 'Modern Fiction', 1);
