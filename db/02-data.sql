@@ -82,10 +82,10 @@ INSERT INTO public.sub_categories (id, name, category_id) VALUES (42, 'Paranorma
 -- =========================
 -- FORMAT
 -- =========================
-INSERT INTO public.format (id, name) VALUES (1, 'print');
-INSERT INTO public.format (id, name) VALUES (2, 'used print');
-INSERT INTO public.format (id, name) VALUES (3, 'audiobook');
-INSERT INTO public.format (id, name) VALUES (4, 'e-book');
+INSERT INTO public.format (id, name) VALUES (1, 'New');
+INSERT INTO public.format (id, name) VALUES (2, 'Used');
+INSERT INTO public.format (id, name) VALUES (3, 'Audiobook');
+INSERT INTO public.format (id, name) VALUES (4, 'Ebook');
 
 -- =========================
 -- AUTHORS
